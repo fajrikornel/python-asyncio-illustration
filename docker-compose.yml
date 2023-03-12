@@ -1,0 +1,12 @@
+version: "3"
+services:
+  delay-server:
+    image: deelay
+    build: ./dependencies/deelay
+    ports:
+      - "4567:4567"
+    networks:
+      - app-network
+
+networks:
+  app-network: {}

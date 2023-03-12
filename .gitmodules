@@ -1,0 +1,3 @@
+[submodule "dependencies/deelay"]
+	path = dependencies/deelay
+	url = https://github.com/biesiad/deelay.git
