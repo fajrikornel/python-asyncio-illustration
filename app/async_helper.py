@@ -1,10 +1,10 @@
 import asyncio
 from aiohttp import ClientSession
-from . import util
+from . import util, app
 
 
 async def fetch_image(image_list: list, url: str, lock: asyncio.Lock, session: ClientSession):
-    print(f"EXECUTING URL: {url}")
+    app.logger.info(f"EXECUTING URL: {url}")
     resp = await session.request(method="GET", url=url)
     resp.raise_for_status()
 

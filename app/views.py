@@ -20,21 +20,21 @@ def main():
 @app.route("/sync")
 def sync_call():
     start_time = time.perf_counter()
-    print(f"STARTING AT: {start_time} s")
+    app.logger.info(f"STARTING AT: {start_time} s")
 
     image_list = []
     for i, url in enumerate(calls_to_make):
-        print(f"EXECUTING NO. {i+1}: {url}")
+        app.logger.info(f"EXECUTING NO. {i+1}: {url}")
         response = requests.get(url)
         image_list.append(response.content)
 
     util.concatenate_and_save_image("img.png", image_list)
 
     stop_time = time.perf_counter()
-    print(f"STOPPING AT: {stop_time} s")
+    app.logger.info(f"STOPPING AT: {stop_time} s")
 
     duration = stop_time - start_time
-    print(f"DONE WITH DURATION: {duration:0.2f} s")
+    app.logger.info(f"DONE WITH DURATION: {duration:0.2f} s")
 
     return {"duration": duration}
 
@@ -42,14 +42,14 @@ def sync_call():
 @app.route("/async")
 def async_call():
     start_time = time.perf_counter()
-    print(f"STARTING AT: {start_time} s")
+    app.logger.info(f"STARTING AT: {start_time} s")
 
     asyncio.run(async_helper.execute_async_call(calls_to_make))
 
     stop_time = time.perf_counter()
-    print(f"STOPPING AT: {stop_time} s")
+    app.logger.info(f"STOPPING AT: {stop_time} s")
 
     duration = stop_time - start_time
-    print(f"DONE WITH DURATION: {duration:0.2f} s")
+    app.logger.info(f"DONE WITH DURATION: {duration:0.2f} s")
 
     return {"duration": duration}

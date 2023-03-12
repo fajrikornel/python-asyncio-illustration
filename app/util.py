@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from . import app
 
 
 def convert_to_opencv_image(img):
@@ -21,4 +22,6 @@ def concatenate_image(image_list):
 def concatenate_and_save_image(image_filename, image_list):
     image_list = list(map(convert_to_opencv_image, image_list))
     image_concatenated = concatenate_image(image_list)
+
+    app.logger.info(f"Saving image to {image_filename}")
     cv2.imwrite(image_filename, image_concatenated)
