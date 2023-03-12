@@ -1,5 +1,6 @@
 import asyncio
 from aiohttp import ClientSession
+from . import util
 
 
 async def fetch_image(image_list: list, url: str, lock: asyncio.Lock, session: ClientSession):
@@ -17,3 +18,5 @@ async def execute_async_call(url_list: list):
         image_list = []
         lock = asyncio.Lock()
         await asyncio.gather(*(fetch_image(image_list, url, lock, session) for url in url_list))
+
+        util.concatenate_and_save_image("img.png", image_list)

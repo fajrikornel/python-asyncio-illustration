@@ -1,4 +1,4 @@
-from . import app, async_helper
+from . import app, async_helper, util
 import time
 import requests
 import asyncio
@@ -27,6 +27,8 @@ def sync_call():
         print(f"EXECUTING NO. {i+1}: {url}")
         response = requests.get(url)
         image_list.append(response.content)
+
+    util.concatenate_and_save_image("img.png", image_list)
 
     stop_time = time.perf_counter()
     print(f"STOPPING AT: {stop_time} s")
